@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.temurkhan13/bash-vet-mcp",
+  "description": "Vet LLM-emitted shell commands BEFORE execution: detects rm -rf / package-glob / dd / mkfs / chmod 777 / curl|bash / chained shutdown / git destructive ops. 24 rules across 8 families.",
+  "repository": {
+    "url": "https://github.com/temurkhan13/bash-vet-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "bash-vet-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

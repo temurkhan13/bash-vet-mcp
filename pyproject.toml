@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bash-vet-mcp"
+version = "1.0.0"
+description = "MCP server that vets LLM-emitted shell commands BEFORE execution — detects rm -rf nested in chains, package-manager glob removal (apt remove '*nvidia*'), dd/mkfs/wipefs filesystem destruction, chmod 777 / chown -R, network-exfil via curl|sh, chained shutdown/reboot, git destructive ops. Defensive complement to MCP shell-execution servers (MCPShell, mcp-shell, mcp-bash). Sub-second, local, free, MCP-native — designed to be called inline by Claude Code / Cursor / Cline / OpenClaw before approving an agent-proposed command."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Temur Khan", email = "temur@pixelette.tech" },
+]
+keywords = ["mcp", "model-context-protocol", "claude", "anthropic", "openai", "ai-agent", "production-ai", "bash-vetting", "shell-security", "command-injection", "rm-rf", "agent-security", "yolo-mode", "openclaw", "agent-ops"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Shells",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "pydantic>=2.0.0",
+    "bashlex>=0.18",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+bash-vet-mcp = "bash_vet_mcp.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/temurkhan13/bash-vet-mcp"
+Documentation = "https://github.com/temurkhan13/bash-vet-mcp/blob/main/SPEC.md"
+"Bug Tracker" = "https://github.com/temurkhan13/bash-vet-mcp/issues"
+"Custom MCP Build" = "https://github.com/temurkhan13/bash-vet-mcp#need-this-adapted-to-your-stack"
+Changelog = "https://github.com/temurkhan13/bash-vet-mcp/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bash_vet_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "A", "C4", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
