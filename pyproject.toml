@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "bash-vet-mcp"
 version = "1.0.0"
-description = "MCP server that vets LLM-emitted shell commands BEFORE execution — detects rm -rf nested in chains, package-manager glob removal (apt remove '*nvidia*'), dd/mkfs/wipefs filesystem destruction, chmod 777 / chown -R, network-exfil via curl|sh, chained shutdown/reboot, git destructive ops. Defensive complement to MCP shell-execution servers (MCPShell, mcp-shell, mcp-bash). Sub-second, local, free, MCP-native — designed to be called inline by Claude Code / Cursor / Cline / OpenClaw before approving an agent-proposed command."
+description = "MCP server that vets LLM-emitted shell commands BEFORE execution. Detects rm -rf in chains, package-glob removal, dd/mkfs/wipefs, chmod 777, curl|bash, chained shutdown, git destructive ops. 24 rules / 8 families. Sub-second, local, no API key. Defensive complement to MCPShell/mcp-shell/mcp-bash."
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
