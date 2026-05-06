@@ -112,7 +112,7 @@ def build_server(backend_name: str = "default") -> Server:  # noqa: ARG001 — b
                     "Return the catalog of every detection rule the scanner applies — "
                     "rule_id, severity, pattern_kind, description, example_match. "
                     "Use this to audit coverage, document detection scope to your "
-                    "compliance/security team, or build a custom allowlist. 24 rules "
+                    "compliance/security team, or build a custom allowlist. 28 rules "
                     "across 8 families: DESTRUCTIVE / PACKAGE / PRIVILEGED / SHUTDOWN "
                     "/ EXFIL / DATABASE / GIT / SUSPICIOUS."
                 ),

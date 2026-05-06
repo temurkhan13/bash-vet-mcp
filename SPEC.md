@@ -79,7 +79,7 @@ Use cases:
 - Compliance documentation: emit the rule catalog into security review packages
 - Custom allowlist: build a downstream allowlist that's the inverse of the rule catalog
 
-## Detection rule families (24 rules in v1.0)
+## Detection rule families (v1.0 shipped with 24; **v1.0.3 = 28** — added `RM_CURRENT_DIR`, `FIND_EXEC_RM` + extended APT/WGET regexes per real-input adversarial validation)
 
 ### `DESTRUCTIVE.*` (filesystem destruction)
 

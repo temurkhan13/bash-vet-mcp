@@ -166,6 +166,7 @@ I'd recommend not running this as-is. Suggested rewrite:
 | Version | Scope | Status |
 |---------|-------|--------|
 | v1.0 | 24 rules across 8 families, bashlex AST + regex fallback, 3 tools / 3 demo resources / 2 prompts, GitHub Actions CI, PyPI Trusted Publishing, MCP Registry submission, 50+ tests | ✅ |
+| **v1.0.3** | **28 rules** (added `DESTRUCTIVE.RM_CURRENT_DIR` for the chiefofautism `rm -rf your repo` scenario, `DESTRUCTIVE.FIND_EXEC_RM`, extended APT/WGET regexes; closes 4 of 5 catalog gaps surfaced by real-input adversarial validation; 11/16 → 15/16 PASS); 111 tests | ✅ |
 | v1.1 | Optional shellcheck-as-backend mode for users who want the higher-quality static analysis on top of the destructive-pattern detection; per-rule severity overrides via config; allowlist mode (specific commands always pass) | ⏳ |
 | v1.2 | Sandboxed dry-run via [`maximumdust`](https://maximumdust.com/) container backend for ambiguous cases; provider-call sandbox to verify network endpoints before `curl | bash` is even attempted | ⏳ |
 | v1.x | Webhook emit on BLOCK verdict; CI integration to gate AI-generated commit-stage hooks that contain destructive patterns | ⏳ |
@@ -234,7 +235,7 @@ MIT — see [LICENSE](./LICENSE).
 
 ## Related
 
-- [Production-AI MCP Suite (Gumroad bundle)](https://temurah.gumroad.com/l/production-ai-mcp-suite) — this server plus 6 others in one curated bundle
+- [Production-AI MCP Suite (Gumroad bundle)](https://temurah.gumroad.com/l/production-ai-mcp-suite) — this server plus 6 others in one curated 7-pack bundle
 - [silentwatch-mcp](https://github.com/temurkhan13/silentwatch-mcp) — cron silent-failure detection
 - [openclaw-health-mcp](https://github.com/temurkhan13/openclaw-health-mcp) — deployment health
 - [openclaw-cost-tracker-mcp](https://github.com/temurkhan13/openclaw-cost-tracker-mcp) — token-cost telemetry + 429 prediction
