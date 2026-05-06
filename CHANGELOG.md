@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [1.0.2] — 2026-05-06
+
+### Added — server-protocol coverage tests (overnight Phase 1A)
+
+- Coverage gap-fillers committed as [`f206f5d`](https://github.com/temurkhan13/bash-vet-mcp/commit/f206f5d). No production-code changes — purely tests exercising the MCP-protocol surface (handler registration, tool / resource / prompt routing) that previously had only end-user-API coverage. Patch bump republishes to PyPI so the test-count badge in README stays consistent across PyPI mirrors.
+
 ## [1.0.1] — 2026-05-05
 
 ### Changed — README refresh from Pass 7 sweep
@@ -29,4 +37,7 @@ Initial release.
 - GitHub Actions CI + release workflow with PyPI Trusted Publishing via OIDC.
 - MCP Registry submission via `mcp-publisher`.
 
+[Unreleased]: https://github.com/temurkhan13/bash-vet-mcp/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/temurkhan13/bash-vet-mcp/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/temurkhan13/bash-vet-mcp/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/temurkhan13/bash-vet-mcp/releases/tag/v1.0.0

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bash-vet-mcp"
-version = "1.0.1"
+version = "1.0.2"
 description = "MCP server that vets LLM-emitted shell commands BEFORE execution. Detects rm -rf in chains, package-glob removal, dd/mkfs/wipefs, chmod 777, curl|bash, chained shutdown, git destructive ops. 24 rules / 8 families. Sub-second, local, no API key. Defensive complement to MCPShell/mcp-shell/mcp-bash."
 readme = "README.md"
 license = { file = "LICENSE" }
