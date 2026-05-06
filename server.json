@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.temurkhan13/bash-vet-mcp",
-  "description": "Vet LLM-emitted shell commands BEFORE execution. 24 destructive-pattern rules / 8 families.",
+  "description": "Vet LLM-emitted shell commands BEFORE execution. 26 destructive-pattern rules / 8 families.",
   "repository": {
     "url": "https://github.com/temurkhan13/bash-vet-mcp",
     "source": "github"
   },
-  "version": "1.0.2",
+  "version": "1.0.3",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "bash-vet-mcp",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "transport": {
         "type": "stdio"
       }

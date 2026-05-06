@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] — 2026-05-06
+
+### Added — 2 new rules + 2 regex extensions (real-input validation gap closures)
+
+Discovered during a real-input validation pass with adversarial commands not from the test fixtures: 5 of 12 representative destructive patterns slipped through v1.0.2's catalog. This release closes 4 of those 5 (the 5th, `rm -rf ./extracted/*`, is intentionally not flagged because relative-path cleanup is plausibly benign — name a specific subdir if you want explicit scope).
+
+**New rules:**
+
+- **`DESTRUCTIVE.RM_CURRENT_DIR`** (HIGH) — catches `rm -rf .`, `rm -rf ./`, `rm -rf ./*`. The chiefofautism threat-model quote in the README ("it can rm -rf your repo") was previously not actually detected — the existing `RM_RECURSIVE_ROOT` rule only matched root system paths (`/`, `/etc`, `~/`). Named subdirs (`rm -rf ./build`, `rm -rf ./node_modules`) are deliberately NOT flagged because they are typically intentional cleanup.
+- **`DESTRUCTIVE.FIND_EXEC_RM`** (HIGH) — catches `find ... -exec rm` patterns. If `-name` is broad or the start path is large, this is mass deletion in disguise. `find -delete` is a separate pattern (not flagged by this rule; could become its own future rule).
+- **`EXFIL.BASE64_PIPE_SHELL`** (HIGH) — catches `base64 -d | bash`, `base64 --decode | sh`, `base64 -D | zsh`. Obfuscation evasion technique — the decoded payload is invisible until execution.
+
+**Extended rules:**
+
+- **`PACKAGE.APT_REMOVE_GLOB`** — now catches `apt-get remove --purge -y python3-*` (trailing-glob form with `--purge` flag) in addition to the existing leading-glob form (`apt remove '*nvidia*'`).
+- **`EXFIL.WGET_PIPE_BASH`** — now catches `wget ... -O - | sh` (space variant) and `wget --output-document=- ... | bash` (long-flag form), in addition to the existing `wget -O- ... | bash` (no-space form).
+
+**Test coverage:** +23 new tests across positive cases per rule + intentional-clean cases to verify no false positives. Total 111 tests passing (was 88). ruff + mypy strict clean.
+
+**Catalog count:** 24 rules → 26 rules. README pyproject description + server.json description updated to reflect the new count.
+
+**Validation gap that drove this release:** documented in `C:/Users/hp/_mcp-validation-2026-05-06/REPORT.md` (PHASE 2 functional tests with real adversarial inputs).
+
 ## [1.0.2] — 2026-05-06
 
 ### Added — server-protocol coverage tests (overnight Phase 1A)
@@ -37,7 +60,8 @@ Initial release.
 - GitHub Actions CI + release workflow with PyPI Trusted Publishing via OIDC.
 - MCP Registry submission via `mcp-publisher`.
 
-[Unreleased]: https://github.com/temurkhan13/bash-vet-mcp/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/temurkhan13/bash-vet-mcp/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/temurkhan13/bash-vet-mcp/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/temurkhan13/bash-vet-mcp/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/temurkhan13/bash-vet-mcp/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/temurkhan13/bash-vet-mcp/releases/tag/v1.0.0

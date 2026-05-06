@@ -1,6 +1,6 @@
 """bash-vet-mcp — MCP server for vetting LLM-emitted shell commands before execution."""
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 from bash_vet_mcp.server import build_server
 
