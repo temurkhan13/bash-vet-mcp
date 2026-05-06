@@ -166,7 +166,7 @@ I'd recommend not running this as-is. Suggested rewrite:
 | Version | Scope | Status |
 |---------|-------|--------|
 | v1.0 | 24 rules across 8 families, bashlex AST + regex fallback, 3 tools / 3 demo resources / 2 prompts, GitHub Actions CI, PyPI Trusted Publishing, MCP Registry submission, 50+ tests | ✅ |
-| **v1.0.3** | **28 rules** (added `DESTRUCTIVE.RM_CURRENT_DIR` for the chiefofautism `rm -rf your repo` scenario, `DESTRUCTIVE.FIND_EXEC_RM`, extended APT/WGET regexes; closes 4 of 5 catalog gaps surfaced by real-input adversarial validation; 11/16 → 15/16 PASS); 111 tests | ✅ |
+| **v1.0.3** | **30 rules** (added `DESTRUCTIVE.RM_CURRENT_DIR` for the chiefofautism `rm -rf your repo` scenario, `DESTRUCTIVE.FIND_EXEC_RM`, `EXFIL.BASE64_PIPE_SHELL`, `PRIVILEGED.CHMOD_777_ROOT` + extended APT/WGET regexes; closes 5 of 5 catalog gaps surfaced by real-input adversarial validation; 11/16 → 15/16 PASS); 111 tests | ✅ |
 | v1.1 | Optional shellcheck-as-backend mode for users who want the higher-quality static analysis on top of the destructive-pattern detection; per-rule severity overrides via config; allowlist mode (specific commands always pass) | ⏳ |
 | v1.2 | Sandboxed dry-run via [`maximumdust`](https://maximumdust.com/) container backend for ambiguous cases; provider-call sandbox to verify network endpoints before `curl | bash` is even attempted | ⏳ |
 | v1.x | Webhook emit on BLOCK verdict; CI integration to gate AI-generated commit-stage hooks that contain destructive patterns | ⏳ |
