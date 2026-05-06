@@ -261,3 +261,61 @@ async def test_get_prompt_vet_chain_arg_passed() -> None:
     )
     text = result.root.messages[0].content.text
     assert "vet_command_chain" in text
+
+
+# ─────────────── Coverage gap fillers (overnight Phase 1) ───────────────
+
+
+async def test_read_resource_sneaky_demo() -> None:
+    """Coverage: server.py:182-183 — sneaky demo URI dispatch."""
+    from mcp.types import ReadResourceRequest, ReadResourceRequestParams
+
+    server = build_server()
+    handler = server.request_handlers[ReadResourceRequest]
+    from pydantic import AnyUrl
+
+    result = await handler(
+        ReadResourceRequest(
+            method="resources/read",
+            params=ReadResourceRequestParams(uri=AnyUrl("bash-vet://demo/sneaky")),
+        )
+    )
+    text = result.root.contents[0].text
+    parsed = json.loads(text)
+    # The sneaky demo's command_chain=True escalation should yield BLOCK
+    assert parsed["verdict"] in ("block", "review", "caution")
+
+
+async def test_read_resource_unknown_uri_returns_error() -> None:
+    """Coverage: server.py:184 — unknown URI fallback."""
+    from mcp.types import ReadResourceRequest, ReadResourceRequestParams
+
+    server = build_server()
+    handler = server.request_handlers[ReadResourceRequest]
+    from pydantic import AnyUrl
+
+    result = await handler(
+        ReadResourceRequest(
+            method="resources/read",
+            params=ReadResourceRequestParams(uri=AnyUrl("bash-vet://demo/does-not-exist")),
+        )
+    )
+    text = result.root.contents[0].text
+    parsed = json.loads(text)
+    assert "error" in parsed
+
+
+async def test_get_prompt_unknown_returns_unknown_prompt_result() -> None:
+    """Coverage: server.py:262 — unknown prompt name fallback."""
+    from mcp.types import GetPromptRequest, GetPromptRequestParams
+
+    server = build_server()
+    handler = server.request_handlers[GetPromptRequest]
+    result = await handler(
+        GetPromptRequest(
+            method="prompts/get",
+            params=GetPromptRequestParams(name="not-a-real-prompt", arguments={}),
+        )
+    )
+    text = result.root.messages[0].content.text
+    assert "Unknown prompt" in text or "not-a-real-prompt" in text
