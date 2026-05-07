@@ -4,7 +4,7 @@
 
 > **MCP server that vets LLM-emitted shell commands BEFORE execution** — detects `rm -rf` nested deep in chains, package-manager glob removal (`apt remove '*nvidia*'`), `dd`/`mkfs`/`wipefs` filesystem destruction, `chmod 777` / `chown -R` privilege blast, network-exfil via `curl | bash`, chained `shutdown`/`reboot`, and `git` destructive ops. **Sub-second, local, free, MCP-native** — designed to be called inline by Claude Code / Cursor / Cline / OpenClaw before approving any agent-proposed command. Defensive complement to MCP shell-execution servers (MCPShell, mcp-shell, mcp-bash).
 
-[![Status: v1.0.0](https://img.shields.io/badge/status-v1.0.0-brightgreen)](https://github.com/temurkhan13/bash-vet-mcp) [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](./LICENSE) [![MCP](https://img.shields.io/badge/protocol-MCP-purple)](https://modelcontextprotocol.io/) [![PyPI](https://img.shields.io/pypi/v/bash-vet-mcp)](https://pypi.org/project/bash-vet-mcp/)
+[![Status: v1.0.3](https://img.shields.io/badge/status-v1.0.3-brightgreen)](https://github.com/temurkhan13/bash-vet-mcp) [![Tests: 111 passing](https://img.shields.io/badge/tests-111%20passing-brightgreen)](./tests) [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](./LICENSE) [![MCP](https://img.shields.io/badge/protocol-MCP-purple)](https://modelcontextprotocol.io/) [![PyPI](https://img.shields.io/pypi/v/bash-vet-mcp)](https://pypi.org/project/bash-vet-mcp/)
 
 ---
 
@@ -63,7 +63,7 @@ Three things existing MCP shell-execution servers don't do:
 
 2. **Sub-second + local + free.** Pure-Python: `bashlex` AST parse + regex pattern bank. No LLM-as-judge call, no API key, no per-call cost. Runs in CI, runs offline, runs at every agent turn without budget pressure.
 
-3. **24 detection rules across 8 families, each with stable rule_id + severity + recommendation.** Not "is this dangerous?" — *exactly which rule fired, what severity, what the operator should do.* This makes the response actionable at the agent loop level (block + retry with a different command) and at the human-review level (audit trail for compliance).
+3. **30 detection rules across 8 families, each with stable rule_id + severity + recommendation.** Not "is this dangerous?" — *exactly which rule fired, what severity, what the operator should do.* This makes the response actionable at the agent loop level (block + retry with a different command) and at the human-review level (audit trail for compliance).
 
 Built for the **production AI operator** who's already using Claude Code / Cursor / Cline / OpenClaw with shell access enabled, who's seen the failure mode at least once, and who wants the agent to vet its own emitted commands before asking for approval.
 
@@ -88,7 +88,7 @@ Prompts:
 
 ---
 
-## Detection rules (24 across 8 families)
+## Detection rules (30 across 8 families)
 
 | Family | Rules | Severity range |
 |--------|-------|----------------|
