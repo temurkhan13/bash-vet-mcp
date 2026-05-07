@@ -1,5 +1,10 @@
 # SPEC — bash-vet-mcp
 
+**Version:** v1.0.3
+**Status:** scanner ships 30 detection rules across 8 families (v1.0.3 added `RM_CURRENT_DIR`, `FIND_EXEC_RM`, `BASE64_PIPE_SHELL`, `CHMOD_777_ROOT` + extended APT/WGET regexes; closes 5 of 5 catalog gaps surfaced by real-input adversarial validation)
+**Tests:** 111 passing
+**Last updated:** 2026-05-07 (D3 SPEC drift sweep — added version header)
+
 Server identifier: `bash-vet`. Lives on PyPI as `bash-vet-mcp`.
 
 ## Architecture (3 layers)
