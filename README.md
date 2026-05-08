@@ -113,6 +113,16 @@ Each rule has a stable `rule_id` (e.g., `DESTRUCTIVE.RM_RECURSIVE_ROOT`) + sever
 pip install bash-vet-mcp
 ```
 
+### Quick verify (~30 seconds, no config)
+
+After install, run the bundled demo to see bash-vet catch real adversarial commands:
+
+```bash
+bash-vet-mcp-demo
+```
+
+You'll see 6 representative shell commands vetted: typically 4 BLOCK (apt-glob removal, curl-pipe-bash, dd to device, chmod 777 -R /etc) + 1 REVIEW (rm-rf with empty env-var) + 1 CLEAN baseline. No external I/O, no API keys — safe to run anywhere. Useful first-30-seconds check before wiring up Claude Desktop.
+
 ### Configure for Claude Desktop
 
 Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
