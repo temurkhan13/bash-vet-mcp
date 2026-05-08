@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] — 2026-05-08
+
+### Added — first-run startup banner (visibility-after-install fix, V2 of cross-product UX retrofit)
+
+When the server starts via `python -m bash_vet_mcp` or the console script, the first stderr line is now a one-line value-prove receipt:
+
+```
+bash-vet-mcp v1.0.4 ready · vets LLM-emitted shell commands BEFORE execution · 26 rules across 8 families · sub-second, local, free
+```
+
+Before v1.0.4 the server started silently — operators who'd just `pip install`ed had no immediate signal of what the server actually does. The banner is the first-30-seconds value moment that was previously missing.
+
+**Suppressible:** set `BASH_VET_QUIET=1` (or `true` / `yes`) to skip the banner. Useful when piping stderr to a log file in production.
+
+**No protocol behavior changed.** Banner is stderr-only; stdout (the MCP JSON-RPC channel) is untouched. Pure observability addition.
+
 ## [1.0.3] — 2026-05-06
 
 ### Added — 2 new rules + 2 regex extensions (real-input validation gap closures)
