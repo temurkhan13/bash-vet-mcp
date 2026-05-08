@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.6] — 2026-05-08
+
+### Added — `bash-vet-mcp-report` console script (V3 of cross-product UX retrofit)
+
+A new console script that vets commands and prints a GitHub-flavored markdown summary on stdout — table of verdicts + per-command finding details + recommendations. Intended for ongoing operational use: piping commands through it, posting to Slack, opening GitHub issues, etc.
+
+**Two input modes:**
+
+- **stdin (one command per line)** — pipe in commands and get a markdown audit table back. Empty lines and `#`-prefixed comments are ignored.
+- **interactive / no stdin** — falls back to the bundled demo command set so the script always produces useful output.
+
+**Usage:**
+
+```bash
+$ bash-vet-mcp-report
+# uses the bundled demo set if stdin is a TTY
+
+$ cat scripts.txt | bash-vet-mcp-report > audit.md
+
+$ echo "rm -rf \$UNSET_VAR/*" | bash-vet-mcp-report
+
+$ git log --oneline | head -100 | grep -oP 'curl[^\s]+' | bash-vet-mcp-report
+```
+
+**Sample output:**
+
+```markdown
+## bash-vet · command vetting report
+
+**Vetted:** 6 commands  ·  **🛑 4 BLOCK**  ·  ⚠ 1 REVIEW  ·  ✓ 1 CLEAN
+
+| Verdict | Risk | Command | Top finding |
+|---|---:|---|---|
+| 🛑 BLOCK | 40/100 | `dd if=/dev/zero of=/dev/sda bs=1M count=100` | `DESTRUCTIVE.DD_TO_DEVICE` (critical) |
+| ...
+```
+
+Forces UTF-8 stdout encoding so emoji + non-ASCII separators render on Windows cp1252-default consoles too. Linux/Mac no-op.
+
+New `render.py` module exports `render_vet_results(...)` for downstream callers who want to embed the formatter directly.
+
+V3 of cross-product UX retrofit. No protocol behavior changed; server itself unaffected.
+
 ## [1.0.5] — 2026-05-08
 
 ### Added — `bash-vet-mcp-demo` console script (V1 of cross-product UX retrofit)
