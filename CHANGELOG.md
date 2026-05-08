@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.5] — 2026-05-08
+
+### Added — `bash-vet-mcp-demo` console script (V1 of cross-product UX retrofit)
+
+A new console script that runs against 6 hand-curated representative shell commands and prints verdict + risk score + first finding for each — in ~30 seconds, without configuring an MCP client.
+
+The 6 commands exercise each rule family:
+
+- `rm -rf $UNSET_VAR/*` — the classic xornullvoid wipeout (variable empty → `rm -rf /*`)
+- `apt remove '*nvidia*'` — package-manager glob removal that cascades
+- `curl ... | bash` — network-exfil-by-installer
+- `dd if=/dev/zero of=/dev/sda` — filesystem destruction
+- `chmod 777 -R /etc` — privilege blast on system path
+- `ls + cat` — clean baseline
+
+For each, the demo prints the verdict (CLEAN/CAUTION/REVIEW/BLOCK), risk_score (0-100), and the first finding's rule_id + pattern_kind + description. Designed for the first-30-seconds-after-install moment.
+
+**Usage:**
+
+```
+$ pip install bash-vet-mcp
+$ bash-vet-mcp-demo
+bash-vet-mcp v1.0.5 · synthetic demo
+    vets LLM-emitted shell commands BEFORE execution · 26 rules / 8 families
+
+  🛑  Package-manager glob removal
+     command: sudo apt remove '*nvidia*' && sudo reboot
+     verdict: BLOCK · risk_score: 20/100 · findings: 2
+     PACKAGE.APT_REMOVE_GLOB: package-glob-remove — apt removing packages by glob pattern
+  ...
+Result: 4 BLOCK · 1 REVIEW · 1 CLEAN  out of 6 inputs.
+```
+
+**No external I/O.** Demo runs vet_command against the bundled hardcoded commands; no network, no API keys, no filesystem access. Safe to run anywhere.
+
+Adds a second console-script entry (`bash-vet-mcp-demo`) alongside the existing `bash-vet-mcp` (the MCP server entry).
+
 ## [1.0.4] — 2026-05-08
 
 ### Added — first-run startup banner (visibility-after-install fix, V2 of cross-product UX retrofit)

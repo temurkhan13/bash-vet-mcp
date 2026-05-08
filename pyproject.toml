@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bash-vet-mcp"
-version = "1.0.4"
+version = "1.0.5"
 description = "MCP server that vets LLM-emitted shell commands BEFORE execution. Detects rm -rf in chains, current-dir wipes (the chiefofautism 'rm -rf your repo' pattern), find-exec-rm, package-glob removal (including --purge form and trailing globs like python3-*), dd/mkfs/wipefs, chmod 777, curl|bash + wget|sh + base64-decode|bash obfuscation, chained shutdown, git destructive ops. 30 rules / 8 families. Sub-second, local, no API key. Defensive complement to MCPShell/mcp-shell/mcp-bash."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -43,6 +43,7 @@ dev = [
 
 [project.scripts]
 bash-vet-mcp = "bash_vet_mcp.__main__:main"
+bash-vet-mcp-demo = "bash_vet_mcp.demo:main"
 
 [project.urls]
 Homepage = "https://github.com/temurkhan13/bash-vet-mcp"
