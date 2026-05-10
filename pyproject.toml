@@ -9,7 +9,7 @@ description = "MCP server that vets LLM-emitted shell commands BEFORE execution.
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Temur Khan", email = "temur@pixelette.tech" },
+    { name = "Temur Khan", email = "hello@temhan.dev" },
 ]
 keywords = ["mcp", "model-context-protocol", "claude", "anthropic", "openai", "ai-agent", "production-ai", "bash-vetting", "shell-security", "command-injection", "rm-rf", "agent-security", "yolo-mode", "openclaw", "agent-ops"]
 classifiers = [

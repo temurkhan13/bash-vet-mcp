@@ -195,7 +195,7 @@ If your AI deployment uses a different shell harness, custom allowlists, languag
 | Complex | Sandboxed dry-run backend (container-isolated execution to validate ambiguous cases) + audit-trail + CI integration | **$30,000–$45,000** | 4–8 weeks |
 
 **To engage:**
-1. Email **temur@pixelette.tech** with subject `Custom MCP Build inquiry — bash-vet`
+1. Email **hello@temhan.dev** with subject `Custom MCP Build inquiry — bash-vet`
 2. Include: 1-paragraph description of your stack + which tier
 3. Reply within 2 business days with a 30-min discovery call slot
 
@@ -226,7 +226,7 @@ If you're running production AI and want an outside practitioner to score readin
 | Audit Standard | Full audit, all 14 patterns, 5 Cs findings, 90-day follow-up | **$3,000** | 2–3 weeks |
 | Audit + Workshop | Standard audit + 2-day team workshop + first monthly audit included | **$7,500** | 3–4 weeks |
 
-Same email channel: **temur@pixelette.tech** with subject `AI audit inquiry`.
+Same email channel: **hello@temhan.dev** with subject `AI audit inquiry`.
 
 ---
 
@@ -258,5 +258,5 @@ MIT — see [LICENSE](./LICENSE).
 
 ---
 
-Built by [Temur Khan](https://www.notion.so/@temurkhan) — independent practitioner on production AI systems.
-Contact: **temur@pixelette.tech**
+Built by [Temur Khan](https://www.notion.so/@temurkhan) — production AI engineer.
+Contact: **hello@temhan.dev**
