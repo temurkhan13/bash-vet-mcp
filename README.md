@@ -253,7 +253,7 @@ MIT — see [LICENSE](./LICENSE).
 - [openclaw-skill-vetter-mcp](https://github.com/temurkhan13/openclaw-skill-vetter-mcp) — skill security vetting
 - [openclaw-upgrade-orchestrator-mcp](https://github.com/temurkhan13/openclaw-upgrade-orchestrator-mcp) — upgrade safety + provider-side regression detection
 - [openclaw-output-vetter-mcp](https://github.com/temurkhan13/openclaw-output-vetter-mcp) — response grounding + swallowed-exception detection
-- [AI Production Discipline Framework](https://temurah.gumroad.com/l/ai-production-discipline-framework) — Notion template, $29 — the methodology these MCP tools implement
+- [AI Production Discipline Framework](https://temurah.gumroad.com/l/ai-production-discipline-framework) — Notion template, $19 — the methodology these MCP tools implement
 - [SPEC.md](./SPEC.md) — full server design
 
 ---
